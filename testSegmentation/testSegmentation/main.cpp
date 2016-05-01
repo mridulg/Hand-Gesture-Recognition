@@ -27,5 +27,20 @@ void ASL_Detection(Mat );
 double distPoints(Point , Point);
 int main(int argc, const char * argv[])
 {
+	Mat orgImg;
+	orgImg = imread("/Users/mridul/Desktop/3.jpg", CV_LOAD_IMAGE_ANYCOLOR);
+	if(orgImage.empty())
+	{
+		cout<<"Issues with loading image. Please try again"<<endl;
+		return 0;
+	}
+	displayImage(orgImage,"Original Image");
 	return 0;
+}
+void displayImage(Mat img, string text)
+{
+	namedWindow(text, WINDOW_AUTOSIZE );
+	imshow(text,img);
+	waitKey(0);
+	destroyWindow(text);
 }

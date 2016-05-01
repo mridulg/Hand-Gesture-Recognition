@@ -14,3 +14,18 @@
 //
 //
 
+#include <opencv2/opencv.hpp>
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+using namespace cv;
+
+void displayImage(Mat , string);
+void ASL_Detection(Mat );
+double distPoints(Point , Point);
+int main(int argc, const char * argv[])
+{
+	return 0;
+}

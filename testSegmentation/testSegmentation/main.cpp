@@ -45,10 +45,11 @@ int main(int argc, const char * argv[])
 	int i=0,j=1;
 	while(i<10)
 	{
-		while(j<11)
+		j=1;
+		while(j<56)
 		{
 			int x=0;
-			char first1[] = "/Users/mridul/Documents/Hand-Gesture-Recognition-using-Kinect/Dataset/Original_Dataset/"; //Add your own source path here
+			char first1[] = "/Users/mridul/HGR/Datasets/originalDataset/"; //Add your own source path here
 			stringstream src, uscore,png,dest;
 			src << first1;
 			src<<i;
@@ -57,7 +58,7 @@ int main(int argc, const char * argv[])
 			src<<j;
 			png<<".png";
 			src<<png.str();
-			char first2[] = "/Users/mridul/Documents/Hand-Gesture-Recognition-using-Kinect/Dataset/My_Dataset/"; //Add your own destination path
+			char first2[] = "/Users/mridul/HGR/Datasets/myDataset/"; //Add your own destination path
 			dest << first2;
 			dest<<i;
 			dest<<uscore.str();
@@ -69,7 +70,8 @@ int main(int argc, const char * argv[])
 			if(orgImg.empty())
 			{
 				cout << "Image not loaded properly." << endl;
-				return  0;
+				j++;
+				continue;
 			}
 			if (orgImg.type() != 0)
 				orgImg = GetSkin(orgImg);
@@ -85,17 +87,20 @@ int main(int argc, const char * argv[])
 			erode(orgImg,orgImg,Mat());
 			dilate(orgImg,orgImg,Mat());
 			imwrite(dest.str(), orgImg);
+			cout<<dest.str()<<endl;
 			j++;
 		}
 		i++;
 	}
 	i='a';j=1;
-	while(i<'z')
+	while(i<='z')
 	{
-		while(j<11)
+//		cout<<"I is "<<i<<endl;
+		j=1;
+		while(j<56)
 		{
 			int x=0;
-			char first1[] = "/Users/mridul/Documents/Hand-Gesture-Recognition-using-Kinect/Dataset/Original_Dataset/";
+			char first1[] = "/Users/mridul/HGR/Datasets/originalDataset/";
 			stringstream src, uscore,png,dest;
 			src << first1;
 			src<<(char)i;
@@ -104,7 +109,7 @@ int main(int argc, const char * argv[])
 			src<<j;
 			png<<".png";
 			src<<png.str();
-			char first2[] = "/Users/mridul/Documents/Hand-Gesture-Recognition-using-Kinect/Dataset/My_Dataset/";
+			char first2[] = "/Users/mridul/HGR/Datasets/myDataset/";
 			dest << first2;
 			dest<<(char)i;
 			dest<<uscore.str();
@@ -116,7 +121,8 @@ int main(int argc, const char * argv[])
 			if(orgImg.empty())
 			{
 				cout << "Image not loaded properly." << endl;
-				return  0;
+				j++;
+				continue;
 			}
 			if (orgImg.type() != 0)
 				orgImg = GetSkin(orgImg);
@@ -133,6 +139,7 @@ int main(int argc, const char * argv[])
 			dilate(orgImg,orgImg,Mat());
 			imwrite(dest.str(), orgImg);
 			j++;
+			cout<<dest.str()<<endl;;
 		}
 		i++;
 	}

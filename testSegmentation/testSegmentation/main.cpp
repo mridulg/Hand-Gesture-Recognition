@@ -29,6 +29,8 @@ int main(int argc, const char * argv[])
 {
 	Mat orgImg;
 	orgImg = imread("/Users/mridul/Desktop/3.jpg", CV_LOAD_IMAGE_ANYCOLOR);
+	if (orgImg.type())
+		orgImg = GetSkin(orgImg);
 	if(orgImage.empty())
 	{
 		cout<<"Issues with loading image. Please try again"<<endl;

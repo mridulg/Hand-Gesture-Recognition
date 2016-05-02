@@ -110,7 +110,6 @@ int main(int argc, const char * argv[])
             dest<<uscore.str();
             dest<<j;
             dest<<png.str();
-//            cout<<src.str()<<endl;
             
             orgImg=imread(src.str(),CV_LOAD_IMAGE_ANYCOLOR);
             
@@ -180,14 +179,6 @@ void ASL_Detection(Mat frame) {
         convexHull( Mat(contours[i]), hullI[i], false);
         convexHull( Mat(contours[i]), hull[i], false);
         
-        //        RotatedRect rect = minAreaRect(Mat(contours[i]));
-        //
-        //        Point2f rect_points[4];
-        //        rect.points(rect_points);
-        //
-        //        for(int j = 0; j < 4; j++)
-        //            line(drawing, rect_points[j], rect_points[(j + 1) % 4], Scalar(255, 0, 0), 1, 8);
-        
         convexityDefects(contours[i], hullI[i], defects);
         cout << "Size of Defects : " << defects.size() << endl;
         Point palm_center_all;
@@ -254,34 +245,21 @@ void ASL_Detection(Mat frame) {
                 Point pt1 = palm_point[distance_vector[j+0].second];
                 Point pt2 = palm_point[distance_vector[j+1].second];
                 Point pt3 = palm_point[distance_vector[j+2].second];
-				
-				find_circle = ThreePointsCircle(pt1, pt2, pt3);
-				
-				// cout << pt1.x << " " << pt1.y << endl;
+		find_circle = ThreePointsCircle(pt1, pt2, pt3);
+		// cout << pt1.x << " " << pt1.y << endl;
                 // cout << pt2.x << " " << pt2.y << endl;
                 // cout << pt3.x << " " << pt3.y << endl;
                 // cout << endl;
                 
                 if(find_circle.second != 0)
-                    break;
+                	break;
             }
             
-            // cout << "Yo " << find_circle.second  << endl;
+            // cout << "What " << find_circle.second  << endl;
             
             avg_center_of_palm.push_back(find_circle);
             
             Point center_of_palm = find_circle.first;
-            //            double radius = find_circle.second;
-            //            if (radius > 0 && radius < 300) {
-            
-            //                circle(drawing, center_of_palm, 5, Scalar(144,144,255), 3);
-            
-            //                // cout << radius << endl;
-            
-            //                circle(drawing, center_of_palm, radius, Scalar(144,144,255), 3);
-            
-            //            }
-            
         }
         
         
@@ -314,30 +292,6 @@ void ASL_Detection(Mat frame) {
     pair < Point, double > all_find_circle;
     vector < pair < Point, double > > all_circle;
     
-    // cout << all_distance_vector.size() << endl;
-    
-    //    for (int j = 0; j < (int)all_distance_vector.size(); j++) {
-    
-    //        for (int k = j+1; k < (int)all_distance_vector.size(); k++) {
-    
-    //            for (int l = k+1; l < (int)all_distance_vector.size(); l++) {
-    
-    //                Point pt1 = all_palm_point[all_distance_vector[j].second];
-    
-    //                Point pt2 = all_palm_point[all_distance_vector[k].second];
-    
-    //                Point pt3 = all_palm_point[all_distance_vector[l].second];
-    
-    //                all_find_circle = ThreePointsCircle(pt1, pt2, pt3);
-    
-    //                all_circle.push_back(all_find_circle);
-    
-    //            }
-    
-    //        }
-    
-    //    }
-    
     
     
     for (int j = 0; j < (int)all_distance_vector.size() - 2; j++) {
@@ -347,7 +301,6 @@ void ASL_Detection(Mat frame) {
         Point pt3 = all_palm_point[all_distance_vector[j + 2].second];
         
         all_find_circle = ThreePointsCircle(pt1, pt2, pt3);
-        //        all_circle.push_back(all_find_circle);
         
         if(all_find_circle.second != 0)
             break;
@@ -357,62 +310,6 @@ void ASL_Detection(Mat frame) {
     
     Point center_of_palm = all_find_circle.first;
     double radius = all_find_circle.second;
-    
-    // sort(all_circle.begin(), all_circle.end());
-    //    int MAXC = 10000000;
-    
-    //    int point_max = -1;
-    
-    //
-    
-    //    for (int j = 0; j < (int)all_circle.size(); j++) {
-    
-    //        int count = 0;
-    
-    //        for (int k = 0; k < frame.rows; k++) {
-    
-    //            for (int l = 0; l < frame.cols; l++) {
-    
-    //                if ((frame.at<float>(k, l) > 200) && (distPoints(all_circle[j].first, Point(l, k))) <= all_circle[j].second) {
-    
-    //                    count++;
-    
-    //                }
-    
-    //            }
-    
-    //        }
-    
-    //        if (count > MAXC) {
-    
-    //            MAXC = count;
-    
-    //            point_max = j;
-    
-    //        }
-    
-    //        // cout << j << " " << all_circle.size() << endl;
-    
-    //    }
-    
-    //
-    
-    //
-    
-    //    int mid_all_circle = point_max;
-    
-    
-    
-    //    Point all_center_of_palm = all_circle[mid_all_circle].first;
-    
-    //    double all_radius = all_circle[mid_all_circle].second;
-    
-    //
-    
-    //     // circle(drawing, center_of_palm, 5, Scalar(144,144,255), 3);
-    
-    //     circle(drawing, all_center_of_palm, all_radius, Scalar(144,144,255), 3);
-    
     
     
     cout << "Radius : " << radius << endl;

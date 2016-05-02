@@ -100,109 +100,112 @@ int main(int argc, const char * argv[]) {
     // HOG Loop computation
     // --------------------------------------------------------------------------------------------------------
     
-    cout << "HOG Loop computation : " << endl;
-    int accuracy = 0;
-    int ctr=0;
-    for (int i1 = 0; i1 < 10; i1++) {
-        for (int j1 = 5; j1 <= 10; j1++) {
-            ctr+=1;
-            float MIN = 100000.0;
-            int imagePos1 = -1;
-            int imagePos2 = -1;
-            for (int l1 = 0; l1 < 10; l1++) {
-                for (int k1 = 1; k1 <= 4; k1++) {
-                    float result = 0.0;
-                    Mat orgImg1;
-                    
-                    char first1[] = "/Users/mridul/HGR/Datasets/myDataset/";
-                    stringstream f1;
-                    f1 << first1;
-                    
-                    stringstream m1, m2, m3;
-                    m1 << i1;
-                    m2 << "_";
-                    m3 << j1;
-                    
-                    char end1[] = ".png";
-                    stringstream e1;
-                    e1 << end1;
-                    
-                    f1 << m1.str();
-                    f1 << m2.str();
-                    f1 << m3.str();
-                    f1 << e1.str();
-                    
-                    orgImg1 = imread(f1.str(), 0);
-                    cout <<"Source: "<< f1.str() << endl;
-                    
-                    if(orgImg1.empty()) {
-                        cout << "Image not loaded properly." << endl;
-                        return  0;
-                    }
-                    
-                    //                     displayImage(orgImg1, "Original Image 1");
-                    Mat keyImg1 = keyPoints(orgImg1);
-                    vector < vector < float > > des1 = HOG(keyImg1);
-                    
-                    Mat orgImg2;
-                    char first2[] = "/Users/mridul/HGR/Datasets/myDataset/";
-                    stringstream f2;
-                    f2 << first2;
-                    
-                    stringstream m11, m12, m13;
-                    m11 << l1;
-                    m12 << "_";
-                    m13 << k1;
-                    
-                    char end2[] = ".png";
-                    stringstream e2;
-                    e2 << end2;
-                    
-                    f2 << m11.str();
-                    f2 << m12.str();
-                    f2 << m13.str();
-                    f2 << e2.str();
-                    
-                    cout <<"Destination: "<< f2.str() << endl;
-                    
-                    orgImg2 = imread(f2.str(), 0);
-                    
-                    
-                    
-                    if(orgImg2.empty()) {
-                        cout << "Imagen not loaded properly." << endl;
-                        return  0;
-                    }
-                    
-                    // displayImage(orgImg2, "Original Image 2");
-                    
-                    Mat keyImg2 = keyPoints(orgImg2);
-                    vector < vector < float > > des2 = HOG(keyImg2);
-                    
-                    float answer = 0;
-                    for (int i = 0; i < 16; i++) {
-                        answer += cosine_dis(des1[i], des2[i]);
-                    }
-                    cout<<"Answer is "<<answer<<endl;
-                    result = (answer/16.0);
-                    cout<<"prelim result for "<<f1.str()<<" with "<<f2.str()<<" is "<<result<<endl;
-                    if (result < MIN) {
-                        MIN = result;
-                        imagePos1 = l1;
-                        imagePos2 = k1;
-                    }
-                }
-            }
-            cout << endl;
-            cout << "Image " << i1 << "_" << j1 << ".jpg minimum cosine measure : " << MIN << "." << endl;
-            cout << "Best match of image " << i1 << "_" << j1 << ".jpg is image " << imagePos1 << "_" << imagePos2 << ".png" << endl;
-            if (imagePos1 == i1)
-                accuracy++;
-        }
-    }
-    
-    cout << endl;
-    cout << "Accuracy : " << (accuracy*100.0)/ctr << "% "<< endl;
+//    cout << "HOG Loop computation : " << endl;
+//    int accuracy = 0;
+//    int ctr=0;
+//    for (int i1 = 0; i1 < 10; i1++) {
+//        for (int j1 = 5; j1 <= 10; j1++) {
+//            ctr+=1;
+//            float MIN = 100000.0;
+//            int imagePos1 = -1;
+//            int imagePos2 = -1;
+//            for (int l1 = 0; l1 < 10; l1++) {
+//                for (int k1 = 1; k1 <= 4; k1++) {
+//                    float result = 0.0;
+//                    Mat orgImg1, orgImg2;
+//                    
+////                    char first1[] = "/Users/mridul/Shakespeer/Telegram/Slides/FaceImages/";
+//                    char first1[]="/Users/mridul/HGR/Datasets/scaledDataset/";
+//                    stringstream f1;
+//                    f1 << first1;
+//                    
+//                    stringstream m1, m2, m3;
+//                    m1 << i1;
+//                    m2 << "_";
+//                    m3 << j1;
+//                    
+//                    char end1[] = ".jpg";
+//                    stringstream e1;
+//                    e1 << end1;
+//                    
+//                    f1 << m1.str();
+//                    f1 << m2.str();
+//                    f1 << m3.str();
+//                    f1 << e1.str();
+//                    
+//                    orgImg1 = imread(f1.str(), 0);
+//                    cout <<"Source: "<< f1.str() << endl;
+//                    
+//                    if(orgImg1.empty()) {
+//                        cout << "Image not loaded properly." << endl;
+//                        return  0;
+//                    }
+//                    
+////                    displayImage(orgImg1, "Original Image 1");
+//                    Mat keyImg1 = keyPoints(orgImg1);
+//                    vector < vector < float > > des1 = HOG(keyImg1);
+//                    
+////                    char first2[]="/Users/mridul/Shakespeer/Telegram/Slides/FaceImages/";
+//                    char first2[] = "/Users/mridul/HGR/Datasets/scaledDataset/";
+//                    stringstream f2;
+//                    f2 << first2;
+//                    
+//                    stringstream m11, m12, m13;
+//                    m11 << l1;
+//                    m12 << "_";
+//                    m13 << k1;
+//                    
+//                    char end2[] = ".jpg";
+//                    stringstream e2;
+//                    e2 << end2;
+//                    
+//                    f2 << m11.str();
+//                    f2 << m12.str();
+//                    f2 << m13.str();
+//                    f2 << e2.str();
+//                    
+//                    orgImg2 = imread(f2.str(), 0);
+//                    cout <<"Destination: "<< f2.str() << endl;
+////                     displayImage(orgImg2, "Original Image 2");
+//
+//                    
+//                    
+//                    
+//                    
+//                    
+//                    if(orgImg2.empty()) {
+//                        cout << "Image not loaded properly." << endl;
+//                        return  0;
+//                    }
+//                    
+//                    
+//                    Mat keyImg2 = keyPoints(orgImg2);
+//                    vector < vector < float > > des2 = HOG(keyImg2);
+//                    
+//                    float answer = 0;
+//                    for (int i = 0; i < 16; i++) {
+//                        answer += cosine_dis(des1[i], des2[i]);
+//                    }
+////                    cout<<"Answer is "<<answer<<endl;
+//                    result = (answer/16.0);
+////                    cout<<"prelim result for "<<f1.str()<<" with "<<f2.str()<<" is "<<result<<endl;
+//                    if (result < MIN) {
+//                        MIN = result;
+//                        imagePos1 = l1;
+//                        imagePos2 = k1;
+//                    }
+//                }
+//            }
+//            cout << endl;
+//            cout << "Image " << i1 << "_" << j1 << ".jpg minimum cosine measure : " << MIN << "." << endl;
+//            cout << "Best match of image " << i1 << "_" << j1 << ".jpg is image " << imagePos1 << "_" << imagePos2 << ".png" << endl;
+//            if (imagePos1 == i1)
+//                accuracy++;
+//        }
+//    }
+//    
+//    cout << endl;
+//    cout << "Accuracy : " << (accuracy*100.0)/ctr << "% "<< endl;
     // --------------------------------------------------------------------------------------------------------
     
     // -------------------------------------------------------------------------------------------------------
@@ -249,114 +252,114 @@ int main(int argc, const char * argv[]) {
     // LBP 3 Loop computation
     // --------------------------------------------------------------------------------------------------------
     
-    //    cout << "Question 3 Loop computation : " << endl;
-    //    int accuracy = 0;
-    //    for (int i1 = 1; i1 <= 10; i1++) {
-    //        for (int j1 = 5; j1 <= 10; j1++) {
-    //            int MIN = INT_MAX;
-    //            int imagePos1 = -1;
-    //            int imagePos2 = -1;
-    //            for (int l1 = 1; l1 <= 10; l1++) {
-    //                for (int k1 = 1; k1 <= 4; k1++) {
-    //                    float result = 0.0;
-    //                    Mat orgImg1;
-    //
-    //                    char first1[] = "/Users/lifecodemohit/Documents/IIITD_Sem5/ImageAnalysis/Slides/FaceImages/";
-    //                    stringstream f1;
-    //                    f1 << first1;
-    //
-    //                    stringstream m1, m2, m3;
-    //                    m1 << i1;
-    //                    m2 << "_";
-    //                    m3 << j1;
-    //
-    //                    char end1[] = ".jpg";
-    //                    stringstream e1;
-    //                    e1 << end1;
-    //
-    //                    f1 << m1.str();
-    //                    f1 << m2.str();
-    //                    f1 << m3.str();
-    //                    f1 << e1.str();
-    //
-    //                    orgImg1 = imread(f1.str(), 0);
-    //                    // cout << f1.str() << endl;
-    //
-    //                    if(orgImg1.empty()) {
-    //                        cout << "Image not loaded properly." << endl;
-    //                        return  0;
-    //                    }
-    //
-    //                    // displayImage(orgImg1, "Original Image 1");
-    //
-    //                    Mat orgImg2;
-    //                    char first2[] = "/Users/lifecodemohit/Documents/IIITD_Sem5/ImageAnalysis/Slides/FaceImages/";
-    //                    stringstream f2;
-    //                    f2 << first2;
-    //
-    //                    stringstream m11, m12, m13;
-    //                    m11 << l1;
-    //                    m12 << "_";
-    //                    m13 << k1;
-    //
-    //                    char end2[] = ".jpg";
-    //                    stringstream e2;
-    //                    e2 << end2;
-    //
-    //                    f2 << m11.str();
-    //                    f2 << m12.str();
-    //                    f2 << m13.str();
-    //                    f2 << e2.str();
-    //
-    //                    orgImg2 = imread(f2.str(), 0);
-    //
-    //                    // cout << f2.str() << endl;
-    //
-    //                    if(orgImg2.empty()) {
-    //                        cout << "Image not loaded properly." << endl;
-    //                        return  0;
-    //                    }
-    //
-    //                    // displayImage(orgImg2, "Original Image 2");
-    //
-    //                    Mat lbpImg1 = lbp(orgImg1);
-    //                    Mat lbpImg2 = lbp(orgImg2);
-    //
-    //                    vector < int > Reg1[64];
-    //                    vector < int > Reg2[64];
-    //
-    //                    for (int i = 0;i < 64; i++) Reg1[i].clear();
-    //                    faceDivide(lbpImg1, Reg1);
-    //                    for (int i = 0;i < 64; i++) Reg2[i].clear();
-    //                    faceDivide(lbpImg2, Reg2);
-    //
-    //                    result = chiSquareDiff(Reg1, Reg2);
-    //                    if (result < MIN) {
-    //                        MIN = result;
-    //                        imagePos1 = l1;
-    //                        imagePos2 = k1;
-    //                    }
-    //                }
-    //            }
-    //            cout << endl;
-    //            cout << "Image " << i1 << "_" << j1 << ".jpg minimum chi square : " << MIN << "." << endl;
-    //            cout << "Best match of image " << i1 << "_" << j1 << ".jpg is image " << imagePos1 << "_" << imagePos2 << ".jpg" << endl;
-    //            if (imagePos1 == i1)
-    //                accuracy++;
-    //        }
-    //    }
-    //
-    //    cout << endl;
-    //    cout << "Accuracy : " << (accuracy*100.0)/60.0 << "% "<< endl;
-    //
-    // --------------------------------------------------------------------------------------------------------
+        cout << "LBP loop computation : " << endl;
+        int accuracy = 0;
+        for (int i1 = 0; i1 < 10; i1++) {
+            for (int j1 = 5; j1 <= 10; j1++) {
+                int MIN = INT_MAX;
+                int imagePos1 = -1;
+                int imagePos2 = -1;
+                for (int l1 = 0; l1 < 10; l1++) {
+                    for (int k1 = 1; k1 <= 4; k1++) {
+                        float result = 0.0;
+                        Mat orgImg1;
+    
+                        char first1[] = "/Users/mridul/HGR/Datasets/scaledDataset/";
+                        stringstream f1;
+                        f1 << first1;
+    
+                        stringstream m1, m2, m3;
+                        m1 << i1;
+                        m2 << "_";
+                        m3 << j1;
+    
+                        char end1[] = ".jpg";
+                        stringstream e1;
+                        e1 << end1;
+    
+                        f1 << m1.str();
+                        f1 << m2.str();
+                        f1 << m3.str();
+                        f1 << e1.str();
+    
+                        orgImg1 = imread(f1.str(), 0);
+//                        cout << f1.str() << endl;
+    
+                        if(orgImg1.empty()) {
+                            cout << f1.str()<<" Image not loaded properly." << endl;
+                            return  0;
+                        }
+    
+                        // displayImage(orgImg1, "Original Image 1");
+    
+                        Mat orgImg2;
+                        char first2[] = "/Users/mridul/HGR/Datasets/scaledDataset/";
+                        stringstream f2;
+                        f2 << first2;
+    
+                        stringstream m11, m12, m13;
+                        m11 << l1;
+                        m12 << "_";
+                        m13 << k1;
+    
+                        char end2[] = ".jpg";
+                        stringstream e2;
+                        e2 << end2;
+    
+                        f2 << m11.str();
+                        f2 << m12.str();
+                        f2 << m13.str();
+                        f2 << e2.str();
+    
+                        orgImg2 = imread(f2.str(), 0);
+    
+//                        cout << f2.str() << endl;
+    
+                        if(orgImg2.empty()) {
+                            cout << f2.str()<<" Image not loaded properly." << endl;
+                            return  0;
+                        }
+    
+                        // displayImage(orgImg2, "Original Image 2");
+    
+                        Mat lbpImg1 = lbp(orgImg1);
+                        Mat lbpImg2 = lbp(orgImg2);
+    
+                        vector < int > Reg1[64];
+                        vector < int > Reg2[64];
+    
+                        for (int i = 0;i < 64; i++) Reg1[i].clear();
+                        faceDivide(lbpImg1, Reg1);
+                        for (int i = 0;i < 64; i++) Reg2[i].clear();
+                        faceDivide(lbpImg2, Reg2);
+    
+                        result = chiSquareDiff(Reg1, Reg2);
+                        if (result < MIN) {
+                            MIN = result;
+                            imagePos1 = l1;
+                            imagePos2 = k1;
+                        }
+                    }
+                }
+                cout << endl;
+                cout << "Image " << i1 << "_" << j1 << ".jpg minimum chi square : " << MIN << "." << endl;
+                cout << "Best match of image " << i1 << "_" << j1 << ".jpg is image " << imagePos1 << "_" << imagePos2 << ".jpg" << endl;
+                if (imagePos1 == i1)
+                    accuracy++;
+            }
+        }
+    
+        cout << endl;
+        cout << "Accuracy : " << (accuracy*100.0)/60.0 << "% "<< endl;
+    
+//     --------------------------------------------------------------------------------------------------------
     return 0;
 }
 
 void displayImage(Mat img, string text) {
     
     namedWindow(text, WINDOW_AUTOSIZE );
-    imshow(text , img);
+    imshow(text,img);
     waitKey(0);
     //    destroyWindow(text);
     
@@ -668,6 +671,7 @@ float cosine_dis(vector < float > d1, vector < float > d2) {
     }
     
     float result = 1.0 - (dotp/(sqrt(dend1)*sqrt(dend2)));
+//    cout<<"cos: "<<result<<endl;
     return result;
 }
 

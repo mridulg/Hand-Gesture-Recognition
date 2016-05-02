@@ -28,7 +28,7 @@ double distPoints(Point , Point);
 int main(int argc, const char * argv[])
 {
 	Mat orgImg;
-	int i=0
+	int i=0;
 	orgImg = imread("/Users/mridul/Desktop/3.jpg", CV_LOAD_IMAGE_ANYCOLOR);
 	if(orgImage.empty())
 	{
@@ -39,6 +39,17 @@ int main(int argc, const char * argv[])
 	if (orgImg.type())
 		orgImg = GetSkin(orgImg);
 	displayImage(orgImage,"Skin Segmented Image");
+	while(i<orgImg.cols)
+	{
+		orgImg.at<uchar>(orgImg.rows - 1, i) = 0;
+		orgImg.at<uchar>(orgImg.rows - 2, i) = 0;
+		orgImg.at<uchar>(orgImg.rows - 3, i) = 0;
+		orgImg.at<uchar>(orgImg.rows - 4, i) = 0;
+		orgImg.at<uchar>(orgImg.rows - 5, i) = 0;
+		i++;
+	}
+	erode(orgImg,orgImg,Mat());
+	dilate(orgImg,orgImg,Mat());
 	return 0;
 }
 

@@ -28,15 +28,17 @@ double distPoints(Point , Point);
 int main(int argc, const char * argv[])
 {
 	Mat orgImg;
+	int i=0
 	orgImg = imread("/Users/mridul/Desktop/3.jpg", CV_LOAD_IMAGE_ANYCOLOR);
-	if (orgImg.type())
-		orgImg = GetSkin(orgImg);
 	if(orgImage.empty())
 	{
 		cout<<"Issues with loading image. Please try again"<<endl;
 		return 0;
 	}
 	displayImage(orgImage,"Original Image");
+	if (orgImg.type())
+		orgImg = GetSkin(orgImg);
+	displayImage(orgImage,"Skin Segmented Image");
 	return 0;
 }
 

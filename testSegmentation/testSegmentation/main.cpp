@@ -37,10 +37,47 @@ int main(int argc, const char * argv[])
 	displayImage(orgImage,"Original Image");
 	return 0;
 }
+
 void displayImage(Mat img, string text)
 {
 	namedWindow(text, WINDOW_AUTOSIZE );
 	imshow(text,img);
 	waitKey(0);
 	destroyWindow(text);
+}
+
+Mat getSkin(Mat img)
+{
+	Mat outImg=img.clone();
+	Mat imgYCRCB, imgHSV;
+	bool rbg=false;
+	Vec3b black = Vec3b::all(0);
+	//    bool b,c ;
+	Vec3b white = Vec3b::all(255);
+	img.convertTo(imgHSV, CV_32FC3);
+    cvtColor(imgHSV,imgHSV, CV_BGR2HSV);
+    normalize(imgHSV,imgHSV, 0.0, 255.0, NORM_MINMAX, CV_32FC3);
+    cvtColor(img, imgYCRCB, CV_BGR2YCrCb);
+    int i=0,j=0; //for-loop initializers
+    while(i<img.rows)
+    {
+    	while(j<img.cols)
+    	{
+    		Vec3f hsv = imgHSV.ptr<Vec3f>(i)[j];
+    		Vec3b bgr = img.ptr<Vec3b>(i)[j];
+    		Vec3b ycrcb = imgYCRCB.ptr<Vec3b>(i)[j];
+    		
+    		int B = bgr.val[0];
+    		int G = bgr.val[1];
+    		int R = bgr.val[2];
+    		j++;
+    		if ((R>95)&&(G>40)&&(B>20)&&((max(R,max(G,B))-min(R,min(G,B)))>15)&&(abs(R-G)>15)&&(R>G)&&(R>B))
+    		rgb = true;
+    		if(rgb)
+    			outImg.ptr<Vec3b>(i)[j]=white;
+    		else outImg.ptr<Vec3b>(i)[j]=black;
+    	}
+    	i++;
+    }
+    return outImg;
 }

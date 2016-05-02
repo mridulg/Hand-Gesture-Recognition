@@ -1,0 +1,11 @@
+KINECT
+WHAT IS IT AND HOW IT WORKS
+The Kinect sensor is composed of an RGB camera, with an 8-bit VGA resolution of 640 x 480 pixels at 30 frames per second (fps) and using a Bayer color filter.
+
+The depth sensor uses an infrared laser projector combined with a monochrome CMOS sensor, allowing to capture data under any light conditions, with 11-bit depth resolution that provides 2048 levels of sensitivity. The combination of the RGB camera in the visible range with the infrared depth sensor realizes the so called “RGB-D sensor.”
+
+In addition, four microphones are used in a directional array to implement vocal commands; the audio is processed with a 16-bit resolution at 16 KHz sampling rate.
+
+Finally, a tilt motor is also present, in such a way that Kinect can change its position on both vertical and horizontal axes.
+
+The reconstruction comes out by differences: the projector emits the pattern and the IR camera catches the reflected pattern. By using some parallel computer vision algorithms, which are commonly known as “Light Coding”, Kinect succeeds in reconstructing the depth map.

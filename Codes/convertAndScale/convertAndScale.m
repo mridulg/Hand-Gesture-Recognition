@@ -8,5 +8,7 @@ for i=0:9
 		imshow(image);
 		scaled=imresize(image,[64 64]);
 		imshow(scaled)
+		destination=strcat('/Users/mridul/HGR/Datasets/scaledDataset/',num2str(i),'_', num2str(j), '.png');
+		destination
 	end
 end

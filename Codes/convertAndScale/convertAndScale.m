@@ -4,5 +4,7 @@ for i=0:9
 		path;
 		x=strcat(path,num2str(i),'_',num2str(j),'.png');
 		x;
+		img=imread(x);
+		imshow(image);
 	end
 end

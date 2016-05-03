@@ -10,5 +10,6 @@ for i=0:9
 		imshow(scaled)
 		destination=strcat('/Users/mridul/HGR/Datasets/scaledDataset/',num2str(i),'_', num2str(j), '.png');
 		destination
+		imwrite(scaled,destination);
 	end
 end

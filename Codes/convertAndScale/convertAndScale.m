@@ -6,5 +6,7 @@ for i=0:9
 		x;
 		img=imread(x);
 		imshow(image);
+		scaled=imresize(image,[64 64]);
+		imshow(scaled)
 	end
 end

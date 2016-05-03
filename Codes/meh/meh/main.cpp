@@ -25,7 +25,7 @@ int main(int argc, const char * argv[]) {
     
     Mat orgImg;
     // orgImg = imread("/Users/lifecodemohit/Documents/IIITD_Sem5/ImageAnalysis/IA_Project/Dataset/D/hand2_1_bot_seg_2_cropped.png", CV_LOAD_IMAGE_ANYCOLOR);
-    orgImg = imread("/Users/mridul/Pictures/Screenshots/hand.png", CV_LOAD_IMAGE_ANYCOLOR);
+    orgImg = imread("/Users/mridul/Desktop/0_2.png", CV_LOAD_IMAGE_ANYCOLOR);
     // orgImg = imread("/Users/lifecodemohit/Documents/IIITD_Sem5/ImageAnalysis/IA_Project/Dataset/D/hand2_3_top_seg_1_cropped.png", CV_LOAD_IMAGE_ANYCOLOR);
     // orgImg = imread("/Users/lifecodemohit/Documents/IIITD_Sem5/ImageAnalysis/IA_Project/Dataset/D/hand2_5_bot_seg_2_cropped.png", CV_LOAD_IMAGE_ANYCOLOR);
     

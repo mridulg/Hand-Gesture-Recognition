@@ -13,3 +13,19 @@ for i=0:9
 		imwrite(scaled,destination);
 	end
 end
+
+for i='a':'z'
+	for j=1:55
+		path='/Users/mridul/HGR/Datasets/myDataset/';
+		path;
+		x=strcat(path,i),'_',num2str(j),'.png');
+		x;
+		img=imread(x);
+		imshow(image);
+		scaled=imresize(image,[64 64]);
+		imshow(scaled)
+		destination=strcat('/Users/mridul/HGR/Datasets/scaledDataset/',i,'_', num2str(j), '.png');
+		destination
+		imwrite(scaled,destination);
+	end
+end
